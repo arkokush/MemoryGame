@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    var viewModel: EmojiMemoryGame
-    @State var emojis: [String] = ["😎", "🤓","🧐","🥸","😳","🧐","🤓","🥸","😳","😎"]
-    @State var color: Color = .red
-     var cardCount = 10
+    @ObservedObject var viewModel: EmojiMemoryGame
+
+    var cardCount = 10
     var body: some View {
         VStack{
             Text("Memorize!")
@@ -19,63 +18,45 @@ struct EmojiMemoryGameView: View {
                 .font(.title2)
             ScrollView{
                 cards
+                    .animation(.default, value: viewModel.cards)
             }
-            Spacer()
-            emojiChangers
+            HStack{
+                Button("New Game"){
+                    viewModel.newGame()
+                }
+                Spacer()
+                Button("Shuffle"){
+                    viewModel.shuffle()
+                }
+            }
         }
         .padding()
     }
     
-    func emojiChanger(theme:[String], colorSelected:Color, symbol: String) -> some View{
-        Button(action: {
-            emojis = theme
-            color = colorSelected
-            emojis.shuffle()
-        }, label: {
-            Text(symbol)
-                .font(.largeTitle)
-        })
-    }
-    
-    var faces: some View{
-        emojiChanger(theme: ["😎", "🤓","🧐","🥸","😳","🧐","🤓","🥸","😳","😎"] , colorSelected: .red,symbol:"😎" )
-        
-                             }
-    var halloween: some View{
-        emojiChanger(theme: ["🎃", "👻","🧙🏻‍♀️","🕷️","💀","🧙🏻‍♀️","👻","🕷️","💀","🎃"] ,colorSelected: .orange, symbol:"🎃" )
-        
-                             }
-    var christmas: some View{
-        emojiChanger(theme: ["🤶🏻", "🎄","🎁","🎉","🎅🏻","🎁","🎄","🎉","🎅🏻","🤶🏻"] ,colorSelected: .green, symbol:"🎄" )
-        
-                             }
-    
-   var emojiChangers: some View{
-        HStack{
-            faces
-            Spacer()
-            halloween
-            Spacer()
-            christmas
-        }
-        
-    }
+
     
     var cards: some View{
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))] ) {
-            ForEach(0..<cardCount,id: \.self){index in
-                CardView(content:emojis[index])
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 85), spacing: 0)], spacing: 0 ) {
+            ForEach(viewModel.cards ){ card in
+                CardView(card)
                     .aspectRatio(2/3,contentMode: .fit)
+                    .padding(4)
+                    .onTapGesture {
+                        viewModel.choose(card)
+                    }
             }
             
         }
-        .foregroundColor(color)
+        .foregroundColor(.green)
     }
    
 }
 struct CardView: View{
-    let content: String
-    @State var isFaceUp = false
+    let card: MemoryGame<String>.Card
+    
+    init(_ card: MemoryGame<String>.Card) {
+        self.card = card
+    }
     var body: some View{
         ZStack {
             let base = RoundedRectangle(cornerRadius: 20)
@@ -84,18 +65,21 @@ struct CardView: View{
                     .foregroundColor(.white)
                 base
                     .strokeBorder(lineWidth: 4)
-                Text(content).font(.largeTitle)
-            }.opacity(isFaceUp ? 1:0)
-           
-            base.opacity(isFaceUp ? 0:1)
-            
+                Text(card.content)
+                    .font(.system(size:200))
+                    .minimumScaleFactor(0.01)
+                    .aspectRatio(1,contentMode: .fit)
+            }
+                .opacity(card.isFaceUp ? 1:0)
+            base
+                .fill()
+                .opacity(card.isFaceUp ? 0:1)
         }
-        .onTapGesture {
-            isFaceUp.toggle()
-        }
+        .opacity(card.isFaceUp || !card.isMatched ? 1:0)
+       
             
     }
 }
 #Preview {
-    EmojiMemoryGameView()
+    EmojiMemoryGameView(viewModel: EmojiMemoryGame())
 }
