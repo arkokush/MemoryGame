@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct EmojiMemoryGameView: View {
+    var viewModel: EmojiMemoryGame
     @State var emojis: [String] = ["😎", "🤓","🧐","🥸","😳","🧐","🤓","🥸","😳","😎"]
     @State var color: Color = .red
      var cardCount = 10
@@ -96,5 +97,5 @@ struct CardView: View{
     }
 }
 #Preview {
-    ContentView()
+    EmojiMemoryGameView()
 }
