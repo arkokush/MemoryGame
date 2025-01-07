@@ -9,8 +9,8 @@ import SwiftUI
 
 struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
-
-    var cardCount = 10
+    
+ 
     var body: some View {
         VStack{
             Text("Memorize!")
@@ -47,7 +47,8 @@ struct EmojiMemoryGameView: View {
             }
             
         }
-        .foregroundColor(.green)
+        .foregroundColor(viewModel.getThemeColor())
+        
     }
    
 }

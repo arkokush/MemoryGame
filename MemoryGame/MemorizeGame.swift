@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUICore
 
 struct MemoryGame<CardContent> where CardContent: Equatable{
     
@@ -67,7 +66,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
         let name: String
         let content:[CardContent]
         let numberOfPairs: Int
-        let color: Color
+        let color: String
     }
 }
 
