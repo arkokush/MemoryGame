@@ -10,10 +10,9 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
- 
     var body: some View {
         VStack{
-            Text("Memorize!")
+            Text("Points: \(viewModel.points)")
                 .fontDesign(.serif)
                 .font(.title2)
             ScrollView{

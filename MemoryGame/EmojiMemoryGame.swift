@@ -9,6 +9,8 @@ import SwiftUI
 
 class EmojiMemoryGame: ObservableObject{
     
+    
+    
     init() {
         let random = Int.random(in: 1...5)
         if random == 1{
@@ -72,7 +74,7 @@ class EmojiMemoryGame: ObservableObject{
     
     
     var cards : [MemoryGame<String>.Card] { model.cards }
-    
+    var points : Int {model.points}
     
     
     //MARK: - Intents
@@ -80,6 +82,7 @@ class EmojiMemoryGame: ObservableObject{
     func shuffle(){
         model.shuffle()
     }
+    
     
     func getThemeColor() -> Color{
         switch EmojiMemoryGame.theme.color{
