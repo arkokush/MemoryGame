@@ -11,6 +11,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     
     private(set) var cards: [Card]
     private(set) var points = 0
+    
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent){
         cards = []
         //add pairs*2 cards
@@ -41,6 +42,9 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
                         cards[chosenIndex].isMatched = true;
                         cards[potentialMatchIndex].isMatched = true
                         points+=2
+                    }
+                    else if cards[chosenIndex].isFlippedBefore && cards[potentialMatchIndex].isFlippedBefore{
+                        points-=2
                     }
                     else if cards[chosenIndex].isFlippedBefore || cards[potentialMatchIndex].isFlippedBefore{
                         points-=1
