@@ -17,7 +17,7 @@ class EmojiMemoryGame: ObservableObject{
         shuffle()
     }
     
-    private let themes: [MemoryGame<String>.Theme] = [christmas, halloween, nature, faces, streetSigns, animals]
+    private let themes: [MemoryGame<String>.Theme] = [christmas, halloween, nature, faces,   streetSigns, animals]
     
     private static let christmas: MemoryGame<String>.Theme = .init(name: "Christmas",
                                         content: ["🎅🏻", "🤶🏻","🎄","🎉","🎁","🎊","🍪","🥛","🦌","🛷","🕎","🧦","❄️","☃️","🧣"],
@@ -26,7 +26,7 @@ class EmojiMemoryGame: ObservableObject{
     
     private static let halloween: MemoryGame<String>.Theme = .init(name: "Halloween",
                                         content: ["🎃", "👻","🧙🏻‍♀️","🕷️","💀","👹","🍭","🍬","😱","☠️"],
-                                        numberOfPairs: 10,
+                                        numberOfPairs: 8,
                                         color: "orange")
     
     private static let nature: MemoryGame<String>.Theme = .init(name: "Nature",
@@ -41,7 +41,7 @@ class EmojiMemoryGame: ObservableObject{
     
     private static let faces: MemoryGame<String>.Theme = .init(name: "Faces",
                                         content: ["😎", "🤓","🧐","🥸","😳","😃","😇","🥰","🤩","🥳"],
-                                        numberOfPairs: 10,
+                                        numberOfPairs: 7,
                                         color: "purple")
     
     private static let animals: MemoryGame<String>.Theme = .init(name: "Animals",
