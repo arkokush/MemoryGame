@@ -68,7 +68,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     //MARK: -Structs
     struct Card: Equatable, Identifiable,  CustomDebugStringConvertible{
         
-        var isFaceUp = false
+        var isFaceUp = true
         var isFlippedBefore = false
         var isMatched = false
         let content: CardContent

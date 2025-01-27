@@ -12,9 +12,9 @@ class EmojiMemoryGame: ObservableObject{
     
     
     init() {
-        changeTheme()
+      //  changeTheme()
         model = EmojiMemoryGame.createMemoryGame()
-        shuffle()
+      //  shuffle()
     }
     
     private let themes: [MemoryGame<String>.Theme] = [christmas, halloween, nature, faces,   streetSigns, animals]
@@ -51,7 +51,7 @@ class EmojiMemoryGame: ObservableObject{
     
     private static var theme: MemoryGame<String>.Theme = .init(name: "Christmas",
                                                         content: ["🎅🏻", "🤶🏻","🎄","🎉","🎁","🎊","🍪","🥛","🦌","🛷","🕎","🧦","❄️","☃️","🧣"],
-                                                        numberOfPairs: 12,
+                                                        numberOfPairs: 2,
                                                         color: "red")
     
     
