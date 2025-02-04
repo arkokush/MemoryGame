@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2382099D2D5258DB006719BE /* FlyingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2382099C2D5258DB006719BE /* FlyingNumber.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		23B0F9A72D0C9FF1003B12D3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2382099C2D5258DB006719BE /* FlyingNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingNumber.swift; sourceTree = "<group>"; };
 		23B0F9962D0C9FEE003B12D3 /* MemoryGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23B0F9A62D0C9FF1003B12D3 /* MemoryGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoryGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23B0F9B02D0C9FF1003B12D3 /* MemoryGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoryGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +80,7 @@
 		23B0F98D2D0C9FEE003B12D3 = {
 			isa = PBXGroup;
 			children = (
+				2382099C2D5258DB006719BE /* FlyingNumber.swift */,
 				23B0F9982D0C9FEE003B12D3 /* MemoryGame */,
 				23B0F9A92D0C9FF1003B12D3 /* MemoryGameTests */,
 				23B0F9B32D0C9FF1003B12D3 /* MemoryGameUITests */,
@@ -236,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2382099D2D5258DB006719BE /* FlyingNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

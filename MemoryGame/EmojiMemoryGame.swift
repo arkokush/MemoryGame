@@ -12,7 +12,7 @@ class EmojiMemoryGame: ObservableObject{
     
     
     init() {
-      //  changeTheme()
+        changeTheme()
         model = EmojiMemoryGame.createMemoryGame()
       //  shuffle()
     }
@@ -49,10 +49,7 @@ class EmojiMemoryGame: ObservableObject{
                                         numberOfPairs: 12,
                                         color: "pink")
     
-    private static var theme: MemoryGame<String>.Theme = .init(name: "Christmas",
-                                                        content: ["🎅🏻", "🤶🏻","🎄","🎉","🎁","🎊","🍪","🥛","🦌","🛷","🕎","🧦","❄️","☃️","🧣"],
-                                                        numberOfPairs: 2,
-                                                        color: "red")
+    private static var theme: MemoryGame<String>.Theme = christmas
     
     
     
@@ -114,7 +111,7 @@ class EmojiMemoryGame: ObservableObject{
     func newGame(){
         changeTheme()
         model = EmojiMemoryGame.createMemoryGame()
-        shuffle()
+      //  shuffle()
     }
                                                                   
 }
