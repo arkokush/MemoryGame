@@ -81,7 +81,6 @@ class EmojiMemoryGame: ObservableObject{
         model.shuffle()
     }
     
-    
     func getThemeColor() -> Color{
         switch EmojiMemoryGame.theme.color{
             case "green": return Color.green

@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
+    
     typealias Card = MemoryGame<String>.Card
     @ObservedObject var viewModel: EmojiMemoryGame
-    
     private let aspectRatio:CGFloat = 2/3
+    private let deckWidth:CGFloat = 50
+    private let delayInterval:TimeInterval = 0.15
+    private let dealDuration = 0.5
     
     
     var body: some View {
@@ -34,6 +37,8 @@ struct EmojiMemoryGameView: View {
         HStack{
             newGameButtonn
             Spacer()
+            deck
+            Spacer()
             shuffleButton
         }
     }
@@ -41,6 +46,8 @@ struct EmojiMemoryGameView: View {
     private var newGameButtonn: some View {
         Button("New Game"){
             viewModel.newGame()
+            dealt.removeAll()
+            
         }
     }
     
@@ -55,24 +62,19 @@ struct EmojiMemoryGameView: View {
         AspectVGrid(viewModel.cards, aspectRatio: aspectRatio ){ card in
             if isDealt(card){
                 CardView(card)
+                    .matchedGeometryEffect(id: card.id, in: dealingNameSpace)
+                    .transition(.asymmetric(insertion: .identity, removal: .identity))
                     .padding(4)
                     .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
                     .zIndex(scoreChange(causedBy: card) != 0 ? 100 : 0)
                     .onTapGesture {
                         choose(card)
                     }
-                    .foregroundColor(viewModel.getThemeColor())
+                    .foregroundStyle(viewModel.getThemeColor())
+                    
             }
         }
-        .onAppear(){
-            //Deal the cards
-            withAnimation(.easeInOut(duration: 2)){
-                for card in viewModel.cards{
-                    dealt.insert(card.id)
-                }
-                        
-            }
-        }
+        
         
     }
         
@@ -85,14 +87,33 @@ struct EmojiMemoryGameView: View {
         viewModel.cards.filter{!isDealt($0)}
     }
     
+    @Namespace private var dealingNameSpace
+    
     private var deck : some View {
         ZStack{
             ForEach(undealtCards) {card in
                 CardView(card)
+                    .matchedGeometryEffect(id: card.id, in: dealingNameSpace)
+                    .transition(.asymmetric(insertion: .identity, removal: .identity))
             }
         }
+        .frame(width: deckWidth, height: deckWidth/aspectRatio)
+        .onTapGesture(){
+            deal()
+        }
+        .foregroundStyle(viewModel.getThemeColor())
+        
     }
     
+    private func deal(){
+        var delay: TimeInterval = 0
+        for card in viewModel.cards{
+            withAnimation(.bouncy(duration: dealDuration).delay(delay)){
+               _ = dealt.insert(card.id)
+            }
+            delay+=delayInterval
+        }
+    }
     private func choose(_ card:Card){
         withAnimation{
             let scoreBeforeChoosing = viewModel.points
